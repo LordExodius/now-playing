@@ -1,13 +1,8 @@
 import { NextApiHandler, NextApiResponse } from "next";
 
 const userHandler: NextApiHandler = async (req, res) => {
-  if (req.method === "GET") {
-    // Handle GET request
-  } else if (req.method === "POST") {
-    // Handle POST request
-  } else {
-    res.setHeader("Allow", ["GET", "POST"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+  // This is a placeholder handler. The actual user profile logic is in [uid].tsx.
+    res.status(418).end(`I'm a teapot, not a user API!`);
 };
 
 export default userHandler;
