@@ -4,7 +4,6 @@ const CARD_WIDTH = 300;
 const CARD_HEIGHT = 80;
 const DARK_GREY = "#2c2e31"
 const MIDDLE_GREY = "#a7a7a0"
-const LIGHT_GREY = "#646669"
 const OFF_WHITE = "#d1d0c5"
 
 interface MusicData {
@@ -49,10 +48,26 @@ const BasicCard = ( musicData: MusicData ) => {
         fill: MIDDLE_GREY,
     };
 
+    const titleMarquee =
+    `
+        .title {
+            transform-box: fill-box;
+            transform-origin: 0 50%;
+            animation: overflow-scroll ${Math.round(musicData.trackTitle.length/2)}s linear infinite;
+            animation-delay: 2.5s;
+        }
+        @keyframes overflow-scroll{
+            0% { transform: translateX(0); }
+            80% { transform: translateX(-50%); }
+            100% { transform: translateX(-50%); }
+        }
+    `;
+    
     return (
         <svg {...svgProps}>
             <defs>
                 <style>
+                    { musicData.trackTitle.length > 22 ? titleMarquee : "" }
                 </style>
             </defs>
 
@@ -62,6 +77,29 @@ const BasicCard = ( musicData: MusicData ) => {
                 fill={DARK_GREY}
                 rx="10"/>
 
+            {/* Now Playing / Recently Played */}
+            <circle cx="85" cy="15" r="4" fill={musicData.nowPlaying ? "#40ce1cff" : "#c43131ff"} />
+            <text x="94" y="19" {...nowPlayingStyle}>{musicData.nowPlaying ? "Now Playing:" : "Recently Played:"}</text>
+
+            {/* Track Information */}
+            <svg>
+                <text x="80" y="37" className="title" {...titleStyle}>
+                    <tspan>{musicData.trackTitle}
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </tspan>
+                    { musicData.trackTitle.length > 22 && <tspan>{musicData.trackTitle}
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </tspan>}
+                </text>
+            </svg>
+            <text x="80" y="52" {...artistStyle}>by {musicData.artist}</text>
+            <text x="80" y="67" {...albumStyle}>from {musicData.album.length > 44 ? musicData.album.substring(0, 41) + "..." : musicData.album}</text>
+
+            {/* Background rectangle for text scroll clipping */}
+            <rect x="0" y="25" width="80" height="15" fill={DARK_GREY} />
+            {/* Right side */}
+            <rect x="290" y="25" width="10" height="45" fill={DARK_GREY} />
+
             {/* Album Art */}
             <image 
                 href={musicData.imageUrl} 
@@ -70,16 +108,6 @@ const BasicCard = ( musicData: MusicData ) => {
                 width="60" 
                 height="60"
                 clip-path="inset(0% round 5px)"/>
-
-            {/* Now Playing / Recently Played */}
-            <circle cx="85" cy="15" r="4" fill={musicData.nowPlaying ? "#40ce1cff" : "#c43131ff"} />
-            <text x="95" y="19" {...nowPlayingStyle}>{musicData.nowPlaying ? "Now Playing:" : "Recently Played:"}</text>
-
-            {/* Track Information */}
-            <text x="80" y="37" {...titleStyle}>{musicData.trackTitle}</text>
-            <text x="80" y="52" {...artistStyle}>by {musicData.artist}</text>
-            <text x="80" y="67" {...albumStyle}>from {musicData.album}</text>
-
         </svg>
     );
 }
