@@ -99,6 +99,8 @@ const BasicCard = ( musicData: MusicData, dark: boolean) => {
                     </tspan>
                     { musicData.trackTitle.length > 22 && <tspan>{musicData.trackTitle}
                         &nbsp;&nbsp;&nbsp;&nbsp;
+                    </tspan> && <tspan>{musicData.trackTitle}
+                        &nbsp;&nbsp;&nbsp;&nbsp;
                     </tspan>}
                 </text>
             </svg>
