@@ -23,6 +23,8 @@ const BasicCard = ( musicData: MusicData, dark: boolean) => {
         SECONDARY_TEXT = "#909090ff"
     }
 
+    console.log(dark ? "Generating dark mode widget..." : "Generating light mode widget...")
+
     const svgProps = {
         xmlns: "http://www.w3.org/2000/svg",
         width: CARD_WIDTH,
