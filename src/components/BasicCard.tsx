@@ -2,9 +2,10 @@
 
 const CARD_WIDTH = 300;
 const CARD_HEIGHT = 80;
-const DARK_GREY = "#2c2e31"
-const MIDDLE_GREY = "#a7a7a0"
-const OFF_WHITE = "#d1d0c5"
+
+let BACKGROUND = "#2c2e31"
+let PRIMARY_TEXT = "#d1d0c5"
+let SECONDARY_TEXT = "#a7a7a0"
 
 interface MusicData {
     nowPlaying: boolean;
@@ -14,7 +15,14 @@ interface MusicData {
     imageUrl: string;
     }
 
-const BasicCard = ( musicData: MusicData ) => {
+const BasicCard = ( musicData: MusicData, dark: boolean) => {
+
+    if (!dark) {
+        BACKGROUND = "#fafafa";
+        PRIMARY_TEXT = "#000000";
+        SECONDARY_TEXT = "#909090ff"
+    }
+
     const svgProps = {
         xmlns: "http://www.w3.org/2000/svg",
         width: CARD_WIDTH,
@@ -26,26 +34,26 @@ const BasicCard = ( musicData: MusicData ) => {
     const nowPlayingStyle = {
         fontFamily: "Arial, sans-serif",
         fontSize: "10px",
-        fill: MIDDLE_GREY,
+        fill: SECONDARY_TEXT,
     };
 
     const titleStyle = {
         fontFamily: "Arial, sans-serif",
         fontSize: "14px",
-        fill: OFF_WHITE,
+        fill: PRIMARY_TEXT,
         fontWeight: "bold",
     };
 
     const artistStyle = {
         fontFamily: "Arial, sans-serif",
         fontSize: "10px",
-        fill: OFF_WHITE,
+        fill: PRIMARY_TEXT,
     };
 
     const albumStyle = {
         fontFamily: "Arial, sans-serif",
         fontSize: "10px",
-        fill: MIDDLE_GREY,
+        fill: SECONDARY_TEXT,
     };
 
     const titleMarquee =
@@ -74,7 +82,7 @@ const BasicCard = ( musicData: MusicData ) => {
             <rect 
                 width="100%" 
                 height="100%" 
-                fill={DARK_GREY}
+                fill={BACKGROUND}
                 rx="10"/>
 
             {/* Now Playing / Recently Played */}
@@ -96,9 +104,9 @@ const BasicCard = ( musicData: MusicData ) => {
             <text x="80" y="67" {...albumStyle}>from {musicData.album.length > 44 ? musicData.album.substring(0, 41) + "..." : musicData.album}</text>
 
             {/* Background rectangle for text scroll clipping */}
-            <rect x="0" y="25" width="80" height="15" fill={DARK_GREY} />
+            <rect x="0" y="25" width="80" height="15" fill={BACKGROUND} />
             {/* Right side */}
-            <rect x="290" y="25" width="10" height="45" fill={DARK_GREY} />
+            <rect x="290" y="25" width="10" height="45" fill={BACKGROUND} />
 
             {/* Album Art */}
             <image 

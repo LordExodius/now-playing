@@ -23,7 +23,7 @@ const Profile = async (req: NextApiRequest, res: NextApiResponse) => {
         artist: jsonData.recenttracks.track[0].artist["#text"],
         album: jsonData.recenttracks.track[0].album["#text"],
         imageUrl: jsonData.recenttracks.track[0].image[2]["#text"]
-    }, true));
+    }, false));
 
     res.setHeader("content-type", "image/svg+xml");
     res.status(200).send(cardSvg);
