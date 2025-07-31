@@ -3,10 +3,6 @@
 const CARD_WIDTH = 300;
 const CARD_HEIGHT = 80;
 
-let BACKGROUND = "#2c2e31"
-let PRIMARY_TEXT = "#d1d0c5"
-let SECONDARY_TEXT = "#a7a7a0"
-
 interface MusicData {
     nowPlaying: boolean;
     trackTitle: string;
@@ -16,6 +12,10 @@ interface MusicData {
     }
 
 const BasicCard = ( musicData: MusicData, dark: boolean) => {
+    
+    let BACKGROUND = "#2c2e31"
+    let PRIMARY_TEXT = "#d1d0c5"
+    let SECONDARY_TEXT = "#a7a7a0"
 
     if (!dark) {
         BACKGROUND = "#fafafa";
