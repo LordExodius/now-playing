@@ -1,7 +1,7 @@
 // pages/api/user/[uid].tsx
 
 import { renderToStaticMarkup } from "react-dom/server";
-import BasicCard from "../../../components/BasicCard"; // Adjust the import path as necessary
+import BasicCard from "@components/BasicCard"; // Adjust the import path as necessary
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const Profile = async (req: NextApiRequest, res: NextApiResponse) => {
